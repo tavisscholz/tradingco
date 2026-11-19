@@ -1,3 +1,4 @@
+import type {Product} from "@/lib/shopify/types";
 import Link from "next/link";
 import {getProducts} from "@/lib/shopify/catalog";
 import {isConfigured} from "@/lib/shopify/client";
@@ -5,7 +6,7 @@ import {ProductGrid} from "@/components/ProductGrid";
 import {ShopState} from "@/components/ShopState";
 const departments=[{name:'Gift Crates',handle:'gift-crates',desc:'READY TO GIVE'},{name:'Pantry & Provisions',handle:'pantry-provisions',desc:'JAMS & LOCAL FLAVORS'},{name:'Home & Camp',handle:'home-camp',desc:'USEFUL EVERYDAY GOODS'},{name:'Art & Woodcraft',handle:'art-woodcraft',desc:'THINGS WITH A STORY'}];
 export default async function Home(){
- let products=[];let error='';
+ let products: Product[] = [];let error='';
  try{products=await getProducts(12);}catch{error='Catalog temporarily unavailable. No orders can be taken.';}
  return <main className="wrap main"><div className="section-meta"><b>THE TRADING POST &nbsp; / &nbsp; FEATURED GOODS</b><span>Thoughtfully gathered · Made for giving · Rooted in the mountains</span></div>
  <section className="feature-grid" aria-label="Featured departments"><div className="feature-main"><div className="feature-visual"><span className="concept-mark">Concept artwork — supplier photography pending</span></div><div className="feature-overlay"><p>THE GIFT CRATE COLLECTION</p><h1>Good things,<br/>gathered here.</h1><p>Regional flavors, small treasures, and useful goods—all packed with a little mountain spirit.</p><Link href="/collections/gift-crates">SHOP GIFT CRATES →</Link></div></div><div className="feature-side"><div className="side-tile pantry"><div><small>FROM THE PANTRY</small><h2>Good stuff<br/>by the jar.</h2><Link href="/collections/pantry-provisions">SHOP PROVISIONS →</Link></div></div><div className="side-tile craft"><div><small>KEEPSAKES & CRAFTS</small><h2>Worth keeping<br/>for years.</h2><Link href="/collections/art-woodcraft">EXPLORE CRAFT →</Link></div></div></div></section>

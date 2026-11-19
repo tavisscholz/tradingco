@@ -34,7 +34,8 @@ export async function checkout() {
  if(!id) return fail('Your bag is empty');
  const cart=await getCart(id).catch(()=>null);
  if(!cart?.checkoutUrl || cart.totalQuantity===0) return fail('Your bag is empty or unavailable');
- const url=new URL(cart.checkoutUrl);
- if(url.protocol!=="https:") return fail('Invalid Shopify checkout URL');
+ let url: URL;
+ try {url=new URL(cart.checkoutUrl);} catch {return fail('Invalid Shopify checkout URL');}
+ if(url.protocol!=="https:" || url.username || url.password) return fail('Invalid Shopify checkout URL');
  redirect(url.href);
 }

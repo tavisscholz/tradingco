@@ -3,8 +3,8 @@ import {storefront} from "./client";
 import type {Cart} from "./types";
 const CART_FIELDS=`
  id checkoutUrl totalQuantity
- estimatedCost {subtotalAmount {amount currencyCode}}
- lines(first:50) {nodes {id quantity attributes {key value} merchandise { ... on ProductVariant {id title price {amount currencyCode} product {title handle featuredImage {url altText}}} }}}
+ cost {subtotalAmount {amount currencyCode}}
+ lines(first:50) {nodes {id quantity cost {totalAmount {amount currencyCode}} attributes {key value} merchandise { ... on ProductVariant {id title product {title}} }}}
 `;
 type CartPayload={cart:Cart|null;userErrors:{field:string[]|null;message:string}[]};
 function check(payload:CartPayload):Cart {
