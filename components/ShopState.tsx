@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function ShopState({message}:{message?:string}){return <div className="unconfigured" role="status"><strong>Preview storefront — not open for orders</strong><p>{message||'Connect a Shopify development store and publish verified products to the Headless sales channel. The checkout is intentionally disabled until then.'}</p><Link href="/build-a-crate">Preview crate options →</Link></div>}
